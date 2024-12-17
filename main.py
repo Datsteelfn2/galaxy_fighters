@@ -22,6 +22,25 @@ def draw_window(red,yellow):
     WIN.blit(RED_SPACESHIP,(red.x,red.y))
     pygame.display.update()
 
+def yellow_handle_movement(keys_pressed,yellow):
+    if keys_pressed[pygame.K_a]:
+        yellow.x-=VELOCITY
+    if keys_pressed[pygame.K_d]:
+        yellow.x+=VELOCITY
+    if keys_pressed[pygame.K_w]:
+        yellow.y-=VELOCITY
+    if keys_pressed[pygame.K_s]:
+        yellow.y+=VELOCITY
+            
+def red_handle_movement(keys_pressed,red):
+    if keys_pressed[pygame.K_LEFT]:
+        red.x-=VELOCITY
+    if keys_pressed[pygame.K_RIGHT]:
+        red.x+=VELOCITY
+    if keys_pressed[pygame.K_UP]:
+        red.y-=VELOCITY
+    if keys_pressed[pygame.K_DOWN]:
+        red.y+=VELOCITY
 def main():
     red=pygame.Rect(700,300,SPCAESHIP_WIDTH,SPACESHIP_HEIGHT)
     yellow=pygame.Rect(100,300,SPCAESHIP_WIDTH,SPACESHIP_HEIGHT)
@@ -35,16 +54,10 @@ def main():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 run=False
+                
         keys_pressed=pygame.key.get_pressed()
-        if keys_pressed[pygame.K_a]:
-            yellow.x-=VELOCITY
-        if keys_pressed[pygame.K_d]:
-            yellow.x+=VELOCITY
-        if keys_pressed[pygame.K_w]:
-            yellow.y-=VELOCITY
-        if keys_pressed[pygame.K_s]:
-            yellow.y+=VELOCITY
-            # if u press a it moves left
+        yellow_handle_movement(keys_pressed,yellow)
+        red_handle_movement(keys_pressed,red)
         draw_window(red,yellow)
 
     pygame.quit()
