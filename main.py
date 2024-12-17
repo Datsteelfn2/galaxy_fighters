@@ -7,6 +7,7 @@ pygame.display.set_caption("Second Game")
 WHITE=(255,255,255)
 
 FPS=60
+VELOCITY=5
 SPCAESHIP_WIDTH,SPACESHIP_HEIGHT=55,40
 
 YELLOW_SPACESHIP_IMAGE=pygame.image.load(os.path.join("images","spaceship_yellow.png"))
@@ -34,7 +35,16 @@ def main():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 run=False
-        red.x+= 1
+        keys_pressed=pygame.key.get_pressed()
+        if keys_pressed[pygame.K_a]:
+            yellow.x-=VELOCITY
+        if keys_pressed[pygame.K_d]:
+            yellow.x+=VELOCITY
+        if keys_pressed[pygame.K_w]:
+            yellow.y-=VELOCITY
+        if keys_pressed[pygame.K_s]:
+            yellow.y+=VELOCITY
+            # if u press a it moves left
         draw_window(red,yellow)
 
     pygame.quit()
